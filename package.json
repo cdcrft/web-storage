@@ -1,0 +1,23 @@
+{
+  "name": "cdcrft-web-storage",
+  "version": "1.0.0",
+  "description": "Small lib made to simplify persistent storage of all type of data with the localStorage Web API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdcrft/web-storage.git"
+  },
+  "keywords": [
+    "web",
+    "storage"
+  ],
+  "author": "Codecraft SAS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cdcrft/web-storage/issues"
+  },
+  "homepage": "https://github.com/cdcrft/web-storage#readme"
+}
