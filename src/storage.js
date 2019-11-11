@@ -1,8 +1,12 @@
-class Storage
+import extend from 'extend';
+
+export default class Storage
 {
-    constructor(config, utils) {
-        this.config = config;
-        this.utils = utils;
+    constructor(config) {
+        this.config = {
+            'storage-keys': {}
+        };
+        extend(this.config, config !== undefined ? config : {});
     }
 
     keys() {
@@ -60,6 +64,19 @@ class Storage
     }
 
     _defaultKeyConfig(key) {
+        let keyString = key;
+        if (typeof key === 'string') {
+            keyString = key;
+            key = key in this.keys() ? this.keys()[key] : undefined;
+        }
+
+        if (key == undefined) {
+            // If nothing was configured for this key, default values will be used
+            key = {
+                name: keyString
+            };
+        }
+
         let defaultConfig = {
             default: '',
             parse: JSON.parse,
@@ -67,7 +84,7 @@ class Storage
             keep: false
         }
 
-        this.utils.extend(defaultConfig, key);
+        extend(defaultConfig, key);
         key = defaultConfig;
 
         if (typeof key.name == 'undefined') {

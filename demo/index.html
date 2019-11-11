@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Codecraft Web Storage Demo</title>
+    </head>
+
+    <body>
+        Check the console for the demo
+        <script type="text/javascript" src="../dist/index.js"></script>
+        <script type="text/javascript">
+            let config = {
+                'storage-keys': {
+                    BOOLEAN: {
+                        name: 'boolean.demo',
+                        default: true,
+                        parse: cdcrftWebStorage.parseBoolean,
+                        stringify: cdcrftWebStorage.stringifyBoolean
+                    }
+                }
+            }
+
+            let storage = new cdcrftWebStorage.Storage(config);
+
+            // For demo purpose, let's wipe out all data
+            storage.clearAll();
+
+            console.log('Store unconfigured value : ');
+            storage.store('VALUE', {foo: "bar"});
+            console.log(storage.get('VALUE'));
+            
+            let keys = storage.keys();
+
+            console.log('Let\'s see the default value for our configured boolean :');
+            console.log('BOOLEAN');
+
+            console.log('Now we store false :');
+            storage.store('BOOLEAN', false);
+            console.log(storage.get('BOOLEAN'));
+
+            // Remember you can access or store the value as follow : 
+
+            let value = storage.get(keys.BOOLEAN);
+        </script>
+    </body>
+</html>

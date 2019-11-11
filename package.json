@@ -2,8 +2,9 @@
   "name": "cdcrft-web-storage",
   "version": "1.0.0",
   "description": "Small lib made to simplify persistent storage of all type of data with the localStorage Web API",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +20,12 @@
   "bugs": {
     "url": "https://github.com/cdcrft/web-storage/issues"
   },
-  "homepage": "https://github.com/cdcrft/web-storage#readme"
+  "homepage": "https://github.com/cdcrft/web-storage#readme",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "extend": "^3.0.2"
+  }
 }
