@@ -85,6 +85,7 @@ export default class Storage
         }
 
         extend(defaultConfig, key);
+
         key = defaultConfig;
 
         if (typeof key.name == 'undefined') {

@@ -128,15 +128,11 @@ If you need to save a value that was not configured but you need a specific conf
 
 ```Javascript
 let config = {
-    'storage-keys': {
-        WHATEVER: {
-            name: 'whatever.the.name',
-            default: '{"foo": "bar"}',
-            parse: customParseFunction,
-            stringify: customStringifyFunction,
-            keep: false
-        }
-    }
+    name: 'whatever.the.name',
+    default: '{"foo": "bar"}',
+    parse: customParseFunction,
+    stringify: customStringifyFunction,
+    keep: false
 }
 
 storage.store(config, myValue);
