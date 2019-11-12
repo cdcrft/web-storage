@@ -4,29 +4,37 @@ export default class Storage
 {
     constructor(config) {
         this.config = {
-            'storage-keys': {}
+            'storage-keys': {},
+            'type': 'local'
         };
         extend(this.config, config !== undefined ? config : {});
+        this.storage = null;
+
+        if (typeof window[`${this.config.type}Storage`] !== 'undefined') {
+            this.storage = window[`${this.config.type}Storage`];
+        } else {
+            throw new Error('Can\'t find the storage type you required');
+        }
     }
 
     keys() {
         return this.config['storage-keys'];
     }
 
-    _localStorage(action, key = null, value = null, setNull = false) {
-        if (typeof window.localStorage == 'undefined') {
-            return;
+    _storage(action, key = null, value = null, setNull = false) {
+        if (typeof this.storage == 'undefined') {
+            throw new Error('No storage was configured');
         }
 
         if (value === null && key === null) {
-            return window.localStorage[action]();
+            return this.storage[action]();
         }
 
         if (value === null && setNull === false) {
-            return window.localStorage[action](key);
+            return this.storage[action](key);
         }
 
-        return window.localStorage[action](key, value);
+        return this.storage[action](key, value);
     }
 
     store(key, value) {
@@ -36,13 +44,13 @@ export default class Storage
             value = key.stringify(value);
         }
 
-        return this._localStorage('setItem', key.name, value, true);
+        return this._storage('setItem', key.name, value, true);
     }
 
     get(key) {
         key = this._defaultKeyConfig(key);
 
-        let result = this._localStorage('getItem', key.name);
+        let result = this._storage('getItem', key.name);
 
         if (result === null) {
             return key.default;
@@ -56,11 +64,11 @@ export default class Storage
     }
 
     remove(key) {
-        return this._localStorage('removeItem', key.name);
+        return this._storage('removeItem', key.name);
     }
 
     clearAll() {
-        return this._localStorage('clear');
+        return this._storage('clear');
     }
 
     _defaultKeyConfig(key) {

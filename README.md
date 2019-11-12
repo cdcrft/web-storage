@@ -2,6 +2,8 @@
 
 This small library aims at facilitating the storage of every kind of value using the web local storage API.
 
+WARNING : The Storage object in this library does not follow the native Storage web interface. This library is an overlay with its own interface. The library makes use of the native web Storage interface.
+
 ## Install
 
 If you use webpack you can install the library using npm :
@@ -27,6 +29,7 @@ First in order to use this library you need to configure the storage keys :
 
 ```Javascript
 let config = {
+    'type': 'local',
     'storage-keys': {
         SOME_ARRAY_OF_OBJECTS: {
             name: 'some.array.of.objects',
@@ -45,7 +48,9 @@ let config = {
 
 Here is an explanation of this config file :
 
-It must be an array containing the 'storage-keys' key. This key should contain another array representing all of the values you wish to save :
+The first value "type" represents the type of storage you want your object to handle. If you need to save your values using the window.localStorage object, then use 'local' if you need to use the window.sessionStorage object then use 'session'.
+
+Then you need an array indexed with the 'storage-keys' key. This array contains all of the values you wish to save :
 
 ### name
 This option is a string representing the name under which your value will be saved inside the local storage

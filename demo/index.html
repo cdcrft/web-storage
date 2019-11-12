@@ -11,6 +11,7 @@
         <script type="text/javascript" src="../dist/index.js"></script>
         <script type="text/javascript">
             let config = {
+                'type': 'session',
                 'storage-keys': {
                     BOOLEAN: {
                         name: 'boolean.demo',
@@ -23,8 +24,8 @@
 
             let storage = new cdcrftWebStorage.Storage(config);
 
-            // For demo purpose, let's wipe out all data
-            storage.clearAll();
+            // For demo purpose, if you use local storage, wipe out all data
+            // storage.clearAll();
 
             console.log('Store unconfigured value : ');
             storage.store('VALUE', {foo: "bar"});
@@ -33,7 +34,7 @@
             let keys = storage.keys();
 
             console.log('Let\'s see the default value for our configured boolean :');
-            console.log('BOOLEAN');
+            console.log(storage.get('BOOLEAN'));
 
             console.log('Now we store false :');
             storage.store('BOOLEAN', false);
