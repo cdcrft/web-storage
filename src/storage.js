@@ -64,6 +64,7 @@ export default class Storage
     }
 
     remove(key) {
+        key = this._defaultKeyConfig(key);
         return this._storage('removeItem', key.name);
     }
 
